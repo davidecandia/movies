@@ -1,2 +1,4 @@
-# Getting Started with Create React App
+# React App
 Movies
+deploy:
+https://dexy98.github.io/movies
