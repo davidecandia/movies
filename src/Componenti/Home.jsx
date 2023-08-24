@@ -9,18 +9,32 @@ const Home = () => {
   };
 
   const filteredMovies = movies.filter((movie) =>
-    movie.Title.toLowerCase().includes(searchTerm.toLowerCase())
+    movie.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const richiestaMovies = async () => {
-    const url = `http://www.omdbapi.com/?s=${searchTerm}&apikey=af658dd6`;
-    const response = await fetch(url);
-    const responseJson = await response.json();
-    setMovies(responseJson.Search || []);
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MWE3ZmIyMWYxMTIwOTcyMzIwZTMzODI5YmMxMmJhZiIsInN1YiI6IjY0ZTczMzFmMDZmOTg0MDBlYjVmMWJlNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gRRsWsLuNHtuPWTo_eeQH7jMC8lbW-P9AJzb3p9QHbY'
+    }
+  };
+
+  const cercaMovies = async () => {
+    const url = 'https://api.themoviedb.org/3/search/movie?query=atom&include_adult=false&language=it-IT';
+    try {
+      const response = await fetch(url, options);
+      const responseJson = await response.json();
+
+    setMovies(responseJson.results || []);
+    console.log('risultato cerca', responseJson.results);
+    } catch (error) {
+      console.error('Errore durante la richiesta API:', error);
+    }
   };
 
   useEffect(() => {
-    richiestaMovies();
+    cercaMovies();
   }, [searchTerm]);
 
   return (
@@ -38,12 +52,12 @@ const Home = () => {
       <div className='overflow-x-auto whitespace-nowrap'>
         <div className='flex space-x-4 p-4'>
           {filteredMovies.map((movie, index) => (
-            <div className='flex-none w-40 hover:scale-110 transition-all' key={movie.imdbID}>
+            <div className='flex-none w-40 hover:scale-110 transition-all' key={movie.id}>
               <div className='relative'>
-                <img src={movie.Poster} alt='No img' className='rounded-lg ' />
+                <img src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} alt='No img' className='rounded-lg ' />
                 <div className='absolute bottom-0 left-0 bg-black bg-opacity-60 text-white p-2 w-full text-center'>
-                  <h2 className='text-xs font-semibold whitespace-normal'>{movie.Title}</h2>
-                  <p className='text-xs'>{movie.Year}</p>
+                  <h2 className='text-xs font-semibold whitespace-normal'>{movie.title}</h2>
+                  <p className='text-xs'>{movie.release_date}</p>
                 </div>
               </div>
             </div>
