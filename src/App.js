@@ -4,14 +4,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Header from "./Componenti/Header";
 import Footer from "./Componenti/Footer";
 import Home from "./Componenti/Home";
+import TopFilm from "./Componenti/topFilm";
 
 function App() {
   return (
     <Router>
-    <div className=' max-w-5xl bg-slate-500 w-full h-auto mx-auto'>
-      <h1 className=" text-red-500">ciao</h1>
+    <div className=" mx-5">
       <Header />
-
+      <TopFilm />
       <Routes>
 
         <Route path='/movies' exact element={<Home />}></Route>
