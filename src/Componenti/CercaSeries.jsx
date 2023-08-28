@@ -1,45 +1,64 @@
-import React, { useEffect, useState } from 'react';
-import { fetchTopFilms } from '../utilities/funzioniApi';
+import React, { useState, useEffect } from 'react';
+import { cercaSerie } from '../utilities/funzioniApi';
 import DescrzioneApertoTV from './DescrizioneApertoTV';
 
-const TopFilm = () => {
-  const [films, setFilms] = useState([]);
+
+const CercaSerieTV = () => {
+  const [serie, setSerie] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [selectedOverview, setSelectedOverview] = useState('');
   const [selectedMovieID, setSelectedMovieID] = useState();
-  const topFilm = async () => {
-    const filmsData = await fetchTopFilms(); 
-    setFilms(filmsData);
+
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
   };
 
+
+  const filteredSerie = serie.filter((tv) =>
+    tv.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const findSerie = async () =>{
+    const trovato = await cercaSerie(searchTerm);
+    setSerie(trovato);
+  }
+
   useEffect(() => {
-    topFilm();
-  }, []);
+    findSerie();
+  }, [searchTerm]);
+
 
   const openOverview = (overview, movieID) => {
     setSelectedOverview(overview);
     setSelectedMovieID(movieID);
   };
+
   return (
-<div className='max-w-5xl w-full mx-auto mt-4'>
-    <h1 className='font-bold text-4xl'>TOP FILMS</h1>
+    <>
+    <div className='max-w-5xl w-full mx-auto '>
+    <h1 className='font-bold text-4xl'>CERCA</h1>
+      <div className='mb-4 transition-all'>
+        <input
+          type='text'
+          placeholder='Cerca...'
+          value={searchTerm}
+          onChange={handleSearchChange}
+          className='px-2 py-1 border border-gray-300 rounded-lg w-40 text-black transition-all'
+        />
+      </div>
       <div className='overflow-x-auto whitespace-nowrap'>
         <div className='flex space-x-4 p-4'>
-          {films.map((movie, index) => (
-            <div className='flex-none w-40 hover:scale-110 transition-all' key={movie.id}  onClick={() => openOverview(movie.overview, movie.id)} >
+          {filteredSerie.map((movie, index) => (
+            <div className='flex-none w-40 hover:scale-110 transition-all' key={movie.id} onClick={() => openOverview(movie.overview, movie.id)}>
               <div className='relative'>
                 <img src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} alt='No img' className='rounded-lg ' />
                 <div className=' absolute top-2 right-2 p-2 bg-slate-500 rounded'>{movie.vote_average}</div>
                 <div className=' text-white p-2 w-full text-center'>
-                  <h2 className='text-xs font-semibold whitespace-normal'>{movie.title}</h2>
+                  <h2 className='text-xs font-semibold whitespace-normal'>{movie.name}</h2>
                   <p className='text-xs'>{movie.release_date}</p>
                 </div>
               </div>
-              <div className=' hidden w-full h-auto'>
-
-              <h2 className='text-xs font-semibold whitespace-normal'>{movie.title}</h2>
-              <h3 className='text-xs font-semibold whitespace-normal'>{movie.overview}</h3>
-              </div>
-
             </div>
           ))}
         </div>
@@ -61,8 +80,8 @@ const TopFilm = () => {
     </div>
   )}
     </div>
+    </>
   );
 };
-  
 
-export default TopFilm;
+export default CercaSerieTV;

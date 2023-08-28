@@ -18,13 +18,10 @@ const Header = () => {
       <div>
         <ul className="flex gap-8">
           <li className=" hover:px-1 hover:rounded-full hover:bg-white hover:text-black">
-            <Link to="./movies">HOME</Link>
+            <Link to="./movies">FILM</Link>
           </li>
           <li className=" hover:px-1 hover:rounded-full hover:bg-white hover:text-black">
-            <Link to="./film">FILM</Link>
-          </li>
-          <li className=" hover:px-1 hover:rounded-full hover:bg-white hover:text-black">
-            <Link to="./serie">SERIE</Link>
+            <Link to="./movies/serie">SERIE</Link>
           </li>
         </ul>
       </div>
