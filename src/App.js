@@ -1,30 +1,41 @@
 import React from "react";
-import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
 import Header from "./Componenti/Header";
 import Footer from "./Componenti/Footer";
 import Films from "./Componenti/cercaFilms";
-
 import Serie from "./Componenti/Serie";
 import DescrzioneAperto from "./Componenti/DescrzioneAperto";
+import DescrzioneApertoTV from "./Componenti/DescrizioneApertoTV";
 
 function App() {
   return (
     <Router>
-    <div className=" mx-5 mt-4">
-      <Header />
+      <div className="mt-4">
+        <Header />
 
-      <Routes>
-
-        <Route path='/movies' exact element={<Films />}></Route>
-        <Route path='/movies/serie' element={<Serie />}></Route> 
-        <Route path='/movies/ID' element={<DescrzioneAperto />}></Route>
-
-      </Routes>
-      <Footer />
-    </div>
-  </Router>
+        <Routes>
+          <Route path='/movies' element={<Films />} />
+          <Route path='/movies/serie' element={<Serie />} />
+          <Route path='/movies/:type/:ID' element={<DetailPage />} />
+        </Routes>
+        
+        <Footer />
+      </div>
+    </Router>
   );
+}
+
+const DetailPage = () => {
+  const { type, ID } = useParams();
+
+  // Decide quale componente renderizzare in base al tipo
+  if (type === "movie") {
+    return <DescrzioneAperto movieID={ID} />;
+  } else if (type === "tv") {
+    return <DescrzioneApertoTV movieID={ID} />;
+  } else {
+    return <p>Errore: Tipo di contenuto non valido</p>;
+  }
 }
 
 export default App;

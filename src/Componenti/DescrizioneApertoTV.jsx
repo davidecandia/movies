@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { cercaIDTV, videoTV } from "../utilities/funzioniApi";
 import { YoutubeIcon } from "../utilities/SVG";
-const DescrzioneApertoTV = ({ movieID }) => {
+import { useParams } from "react-router";
+
+const DescrzioneApertoTV = () => {
+  const { ID: movieID } = useParams();
+
   const [open, setOpen] = useState(null);
   const [filmato, setFilmato] = useState();
 
@@ -31,7 +35,7 @@ const DescrzioneApertoTV = ({ movieID }) => {
             alt="No img"
             className=" w-full h-screen z-0 img-full rounded-md"
           />
-          <div className="absolute top-0 left-0 w-full h-full text-white z-10 p-4 lg:flex gap-4 items-center ">
+          <div className="max-w-5xl mx-[50%] translate-x-[-50%] absolute top-0 left-0 w-full h-full text-white z-10 p-4 lg:flex gap-4 items-center  ">
             <img
               src={`https://image.tmdb.org/t/p/w300${open.poster_path}`}
               alt="no img"

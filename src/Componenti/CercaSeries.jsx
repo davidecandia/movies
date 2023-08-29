@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { cercaSerie } from '../utilities/funzioniApi';
 import DescrzioneApertoTV from './DescrizioneApertoTV';
-
+import { Link, useParams } from 'react-router-dom';
 
 const CercaSerieTV = () => {
   const [serie, setSerie] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedOverview, setSelectedOverview] = useState('');
-  const [selectedMovieID, setSelectedMovieID] = useState();
+
+
+  const { ID } = useParams();
 
 
   const handleSearchChange = (event) => {
@@ -29,10 +30,6 @@ const CercaSerieTV = () => {
   }, [searchTerm]);
 
 
-  const openOverview = (overview, movieID) => {
-    setSelectedOverview(overview);
-    setSelectedMovieID(movieID);
-  };
 
   return (
     <>
@@ -50,34 +47,22 @@ const CercaSerieTV = () => {
       <div className='overflow-x-auto whitespace-nowrap'>
         <div className='flex space-x-4 p-4'>
           {filteredSerie.map((movie, index) => (
-            <div className='flex-none w-40 hover:scale-110 transition-all' key={movie.id} onClick={() => openOverview(movie.overview, movie.id)}>
+            <Link to={`/movies/tv/${movie.id}`} className='flex-none w-40 hover:scale-110 transition-all' key={movie.id}>
               <div className='relative'>
                 <img src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} alt='No img' className='rounded-lg ' />
-                <div className=' absolute top-2 right-2 p-2 bg-slate-500 rounded'>{movie.vote_average}</div>
+                <div className=' absolute top-2 right-2 p-2 bg-zinc-800 rounded-full'>{movie.vote_average}</div>
                 <div className=' text-white p-2 w-full text-center'>
                   <h2 className='text-xs font-semibold whitespace-normal'>{movie.name}</h2>
                   <p className='text-xs'>{movie.release_date}</p>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
-      {selectedOverview && (
-    <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-5'>
-      <div className='bg-[#121212] w-full h-auto relative'>
-        <div className='flex justify-between items-center'>
-          <button
-            className='absolute top-10 right-5 z-20 text-2xl font-bold  hover:px-1 hover:rounded-full hover:bg-white hover:text-black'
-            onClick={() => setSelectedOverview('')}
-          >
-            Chiudi
-          </button>
-        </div>
-        <br />
-        <DescrzioneApertoTV movieID={selectedMovieID} /> {/* Passa movieID come prop */}
-      </div>
-    </div>
+
+      {ID && (
+        <DescrzioneApertoTV movieID={ID} />
   )}
     </div>
     </>

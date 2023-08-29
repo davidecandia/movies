@@ -88,7 +88,7 @@ const cercaSerie = async (searchTerm) => {
       }
     };
 
-    //find by ID 
+    //find by ID film
     const cercaID = async ({movieID}) => {
       const options = {
         method: 'GET',
