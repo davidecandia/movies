@@ -22,7 +22,7 @@ const DescrzioneAperto = ({ movieID }) => {
   }, []);
   console.log("film", filmato);
   return (
-    <div className="relative z-50">
+    <div className="relative">
       {open && (
         <div className="max-w-5xl w-full mx-auto mt-4 relative">
           <div className="absolute top-0 left-0 w-full h-full bg-black opacity-70 z-1"></div>
