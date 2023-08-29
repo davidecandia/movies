@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { cercaIDTV } from "../utilities/funzioniApi";
+import { cercaIDTV, videoTV } from "../utilities/funzioniApi";
+import { YoutubeIcon } from "../utilities/SVG";
 const DescrzioneApertoTV = ({ movieID }) => {
   const [open, setOpen] = useState(null);
+  const [filmato, setFilmato] = useState();
+
   const findById = async () => {
     const trovato = await cercaIDTV({ movieID });
     setOpen(trovato);
@@ -9,6 +12,14 @@ const DescrzioneApertoTV = ({ movieID }) => {
 
   useEffect(() => {
     findById();
+  }, []);
+
+  const trailer = async () => {
+    const trovato = await videoTV({ movieID });
+    setFilmato(trovato);
+  };
+  useEffect(() => {
+    trailer();
   }, []);
   return (
     <div className="relative">
@@ -47,6 +58,29 @@ const DescrzioneApertoTV = ({ movieID }) => {
               </div>
 
               <br />
+              {filmato && (
+                <>
+                  {filmato.responseJson.results.length > 0 ||
+                  filmato.responseJsonEn.results.length > 0 ? (
+                    <h4 className="flex gap-2">
+                      Guarda il trailer su {<YoutubeIcon/>}YouTube:{" "}
+                      <a
+                        target="blank"
+                        href={`https://www.youtube.com/watch?v=${
+                          (
+                            filmato.responseJson.results[0] ||
+                            filmato.responseJsonEn.results[0]
+                          ).key
+                        }`}
+                      >
+                         •Link
+                      </a>
+                    </h4>
+                  ) : (
+                    <p>Nessun trailer disponibile.</p>
+                  )}
+                </>
+              )}
               <button className=" p-2 bg-zinc-800 rounded-full">
                 {Math.round(open.vote_average * 10) / 10}
               </button>

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { cercaID } from "../utilities/funzioniApi";
+import { cercaID, video } from "../utilities/funzioniApi";
+import { YoutubeIcon } from "../utilities/SVG";
 const DescrzioneAperto = ({ movieID }) => {
   const [open, setOpen] = useState(null);
+  const [filmato, setFilmato] = useState();
   const findById = async () => {
     const trovato = await cercaID({ movieID });
     setOpen(trovato);
@@ -10,8 +12,17 @@ const DescrzioneAperto = ({ movieID }) => {
   useEffect(() => {
     findById();
   }, []);
+
+  const trailer = async () => {
+    const trovato = await video({ movieID });
+    setFilmato(trovato);
+  };
+  useEffect(() => {
+    trailer();
+  }, []);
+  console.log("film", filmato);
   return (
-    <div className="relative">
+    <div className="relative z-50">
       {open && (
         <div className="max-w-5xl w-full mx-auto mt-4 relative">
           <div className="absolute top-0 left-0 w-full h-full bg-black opacity-70 z-1"></div>
@@ -42,7 +53,7 @@ const DescrzioneAperto = ({ movieID }) => {
                 ) : (
                   <p>Genere non disponibile</p>
                 )}
-                <p className="ml-3">•{open.runtime} min</p>
+                <p className="ml-3">• {open.runtime} Min</p>
               </div>
 
               <br />
@@ -50,6 +61,30 @@ const DescrzioneAperto = ({ movieID }) => {
                 {Math.round(open.vote_average * 10) / 10}
               </button>
               <br />
+              {filmato && (
+                <>
+                  {filmato.responseJson.results.length > 0 ||
+                  filmato.responseJsonEn.results.length > 0 ? (
+                    <h4 className="flex gap-2">
+                      Guarda il trailer su {<YoutubeIcon/>}YouTube:{" "}
+                      <a
+                        target="blank"
+                        href={`https://www.youtube.com/watch?v=${
+                          (
+                            filmato.responseJson.results[0] ||
+                            filmato.responseJsonEn.results[0]
+                          ).key
+                        }`}
+                      >
+                         •Link
+                      </a>
+                    </h4>
+                  ) : (
+                    <p>Nessun trailer disponibile.</p>
+                  )}
+                </>
+              )}
+
               <div>
                 <h2 className=" font-bold text-xl">Descrizione</h2>
                 <p className=" font-normal text-md leading-5">

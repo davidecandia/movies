@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchTopFilms } from '../utilities/funzioniApi';
-import DescrzioneApertoTV from './DescrizioneApertoTV';
+import DescrzioneAperto from './DescrzioneAperto';
 
 const TopFilm = () => {
   const [films, setFilms] = useState([]);
@@ -56,7 +56,7 @@ const TopFilm = () => {
           </button>
         </div>
         <br />
-        <DescrzioneApertoTV movieID={selectedMovieID} /> {/* Passa movieID come prop */}
+        <DescrzioneAperto movieID={selectedMovieID} /> 
       </div>
     </div>
   )}

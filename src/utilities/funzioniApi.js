@@ -137,5 +137,62 @@ const cercaSerie = async (searchTerm) => {
           }
         }
 
-  export  { fetchTopFilms, cercaMovies, fetchTopSerie, cercaSerie, cercaID, cercaIDTV };
+        //video movies
+        const video = async ({movieID}) => {
+        const options = {
+          method: 'GET',
+          headers: {
+            accept: 'application/json',
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MWE3ZmIyMWYxMTIwOTcyMzIwZTMzODI5YmMxMmJhZiIsInN1YiI6IjY0ZTczMzFmMDZmOTg0MDBlYjVmMWJlNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gRRsWsLuNHtuPWTo_eeQH7jMC8lbW-P9AJzb3p9QHbY'
+          }
+        };
+
+        const url = `https://api.themoviedb.org/3/movie/${movieID}/videos?language=it-IT`;
+        const urlEn = `https://api.themoviedb.org/3/movie/${movieID}/videos?language=en-US`;
+        
+          try {
+            const response = await fetch(url, options);
+            const responseJson = await response.json();
+            console.log('video', responseJson)
+
+            const responseEn = await fetch(urlEn, options);
+            const responseJsonEn = await responseEn.json();
+
+            return { responseJson, responseJsonEn } || [];
+          } catch (error) {
+            console.error('Error during API request:', error);
+            return {};
+          }
+        }
+
+        //video movies tv
+        const videoTV = async ({movieID}) => {
+          const options = {
+            method: 'GET',
+            headers: {
+              accept: 'application/json',
+              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MWE3ZmIyMWYxMTIwOTcyMzIwZTMzODI5YmMxMmJhZiIsInN1YiI6IjY0ZTczMzFmMDZmOTg0MDBlYjVmMWJlNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gRRsWsLuNHtuPWTo_eeQH7jMC8lbW-P9AJzb3p9QHbY'
+            }
+          };
+  
+          const url = `https://api.themoviedb.org/3/tv/${movieID}/videos?language=it-IT`;
+          const urlEn = `https://api.themoviedb.org/3/tv/${movieID}/videos?language=en-US`;
+          
+            try {
+              const response = await fetch(url, options);
+              const responseJson = await response.json();
+              console.log('video', responseJson)
+  
+              const responseEn = await fetch(urlEn, options);
+              const responseJsonEn = await responseEn.json();
+  
+              return { responseJson, responseJsonEn } || [];
+            } catch (error) {
+              console.error('Error during API request:', error);
+              return {};
+            }
+          }
+  
+
+  export  { fetchTopFilms, cercaMovies, fetchTopSerie, cercaSerie, cercaID, cercaIDTV, video, videoTV };
   

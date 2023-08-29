@@ -77,7 +77,7 @@ const CercaFilms = () => {
           </button>
         </div>
         <br />
-        <DescrzioneAperto movieID={selectedMovieID} /> {/* Passa movieID come prop */}
+        <DescrzioneAperto movieID={selectedMovieID} /> 
       </div>
     </div>
   )}

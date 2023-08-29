@@ -61,7 +61,7 @@ const Serie = () => {
           </button>
         </div>
         <br />
-        <DescrzioneApertoTV movieID={selectedMovieID} /> {/* Passa movieID come prop */}
+        <DescrzioneApertoTV movieID={selectedMovieID} /> 
       </div>
     </div>
   )}
