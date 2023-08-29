@@ -24,22 +24,23 @@ const DescrzioneApertoTV = ({ movieID }) => {
   return (
     <div className="relative">
       {open && (
-        <div className="max-w-5xl w-full mx-auto mt-4 relative">
+        <div className=" w-full mx-auto h-full relative">
           <div className="absolute top-0 left-0 w-full h-full bg-black opacity-70 z-1"></div>
           <img
             src={`https://image.tmdb.org/t/p/w500${open.backdrop_path}`}
             alt="No img"
-            className="w-full h-auto z-0 img-full rounded-md"
+            className=" w-full h-screen z-0 img-full rounded-md"
           />
-          <div className="absolute top-0 left-0 w-full h-full text-white z-10 p-4 flex gap-4">
+          <div className="absolute top-0 left-0 w-full h-full text-white z-10 p-4 lg:flex gap-4 items-center ">
             <img
               src={`https://image.tmdb.org/t/p/w300${open.poster_path}`}
               alt="no img"
-              className=" rounded-2xl"
+              className=" rounded-2xl w-60 h-80 max-sm:w-28 max-sm:h-44 "
             />
             <div>
               <h1 className="text-3xl font-bold">
                 {open.name}{" "}
+                <br />
                 <span className=" opacity-80">({open.first_air_date})</span>
               </h1>
               <div className="flex">

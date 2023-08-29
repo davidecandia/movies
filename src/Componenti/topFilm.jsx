@@ -25,7 +25,7 @@ const TopFilm = () => {
       <div className='overflow-x-auto whitespace-nowrap'>
         <div className='flex space-x-4 p-4'>
           {films.map((movie, index) => (
-            <div className='flex-none w-40 hover:scale-110 transition-all' key={movie.id}  onClick={() => openOverview(movie.overview, movie.id)} >
+            <div className='flex-none w-40 hover:scale-110 transition-all' key={movie.id} Link onClick={() => openOverview(movie.overview, movie.id)} >
               <div className='relative'>
                 <img src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} alt='No img' className='rounded-lg ' />
                 <div className=' absolute top-2 right-2 p-2 bg-slate-500 rounded'>{movie.vote_average}</div>
@@ -45,9 +45,9 @@ const TopFilm = () => {
         </div>
       </div>
       {selectedOverview && (
-    <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-5'>
-      <div className='bg-[#121212] w-full h-auto relative'>
-        <div className='flex justify-between items-center'>
+    <div className=' fixed inset-0 flex items-center justify-center bg-black bg-opacity-80'>
+      <div className=' w-full h-auto relative p-8'>
+        <div className='flex justify-between items-center relative'>
           <button
             className='absolute top-10 right-5 z-20 text-2xl font-bold  hover:px-1 hover:rounded-full hover:bg-white hover:text-black'
             onClick={() => setSelectedOverview('')}

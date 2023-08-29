@@ -5,9 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
 
 /* ! Reset */
-body, html{ font-size: 16px;  font-family: 'Lato','Segoe UI', 'Roboto', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif; box-sizing: border-box;margin: 0;padding: 0; scroll-behavior: smooth;  background-color: black;
+body, html{ font-size: 16px;  font-family: 'Lato','Segoe UI', 'Roboto', 'Oxygen'; box-sizing: border-box;margin: 0;padding: 0; scroll-behavior: smooth;  background-color: black;
   color: white;}
 *,*:before,*:after{ box-sizing: border-box; }
 h1,h2,h3,h4,h5,h6, p, ol, ul{margin: 0;padding: 0;}

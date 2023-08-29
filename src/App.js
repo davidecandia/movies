@@ -11,7 +11,7 @@ import DescrzioneAperto from "./Componenti/DescrzioneAperto";
 function App() {
   return (
     <Router>
-    <div className=" mx-5">
+    <div className=" mx-5 mt-4">
       <Header />
 
       <Routes>

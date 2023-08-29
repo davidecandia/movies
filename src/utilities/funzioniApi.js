@@ -149,6 +149,7 @@ const cercaSerie = async (searchTerm) => {
 
         const url = `https://api.themoviedb.org/3/movie/${movieID}/videos?language=it-IT`;
         const urlEn = `https://api.themoviedb.org/3/movie/${movieID}/videos?language=en-US`;
+        const urlProvaider = `https://api.themoviedb.org/3/movie/${movieID}/watch/providers`;
         
           try {
             const response = await fetch(url, options);
@@ -158,7 +159,13 @@ const cercaSerie = async (searchTerm) => {
             const responseEn = await fetch(urlEn, options);
             const responseJsonEn = await responseEn.json();
 
-            return { responseJson, responseJsonEn } || [];
+
+            
+            const responseProvaider = await fetch(urlProvaider, options);
+            const responseJsonProvaider = await responseProvaider.json();
+
+
+            return { responseJson, responseJsonEn, responseJsonProvaider } || [];
           } catch (error) {
             console.error('Error during API request:', error);
             return {};
@@ -176,8 +183,7 @@ const cercaSerie = async (searchTerm) => {
           };
   
           const url = `https://api.themoviedb.org/3/tv/${movieID}/videos?language=it-IT`;
-          const urlEn = `https://api.themoviedb.org/3/tv/${movieID}/videos?language=en-US`;
-          
+          const urlEn = `https://api.themoviedb.org/3/tv/${movieID}/videos?language=en-US`;          
             try {
               const response = await fetch(url, options);
               const responseJson = await response.json();
@@ -192,6 +198,9 @@ const cercaSerie = async (searchTerm) => {
               return {};
             }
           }
+
+          
+
   
 
   export  { fetchTopFilms, cercaMovies, fetchTopSerie, cercaSerie, cercaID, cercaIDTV, video, videoTV };
