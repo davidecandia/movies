@@ -4,7 +4,7 @@ import film from "../assets/film.json";
 import { Link } from "react-router-dom";
 const Header = () => {
   return (
-    <nav className=" max-w-5xl w-full mx-auto h-20 bg-[#121212] flex justify-between items-center px-4 rounded-full">
+    <nav className=" max-w-5xl w-full mx-auto h-20 bg-[#121212] flex justify-between items-center  rounded-full">
       <div className="logo">
         <Player
           autoplay

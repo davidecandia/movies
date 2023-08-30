@@ -21,7 +21,7 @@ const TopFilm = () => {
 
   return (
     <div className='max-w-5xl w-full mx-auto '>
-      <h1 className='font-bold text-4xl'>TOP FILMS</h1>
+      <h1 className='font-bold text-4xl my-4'>TOP FILMS</h1>
       <div className='overflow-x-auto whitespace-nowrap'>
         <div className='flex space-x-4 p-4'>
           {films.map((movie) => (
@@ -43,21 +43,7 @@ const TopFilm = () => {
         </div>
       </div>
       {ID && (
-      <DescrzioneAperto movieID={ID} />
-        // <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-80'>
-        //   <div className='w-full h-auto relative'>
-        //     <div className='flex justify-between items-center relative'>
-        //       <button
-        //         className='absolute top-10 right-5 z-20 text-2xl font-bold hover:px-1 hover:rounded-full hover:bg-white hover:text-black hover:transition-all'
-        //       >
-        //         Chiudi
-        //       </button>
-        //     </div>
-        //     <br />
-        //     <DescrzioneAperto movieID={ID} />
-        //   </div>
-        // </div>
-      )}
+      <DescrzioneAperto movieID={ID} />)}
     </div>
   );
 };
