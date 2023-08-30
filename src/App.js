@@ -28,7 +28,6 @@ function App() {
 const DetailPage = () => {
   const { type, ID } = useParams();
 
-  // Decide quale componente renderizzare in base al tipo
   if (type === "movie") {
     return <DescrzioneAperto movieID={ID} />;
   } else if (type === "tv") {
