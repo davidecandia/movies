@@ -2,8 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-
-.img-full{
-    
-    object-fit: cover;
-}
