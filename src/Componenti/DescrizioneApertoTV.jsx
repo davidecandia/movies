@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { cercaIDTV, videoTV } from "../utilities/funzioniApi";
 import { YoutubeIcon } from "../utilities/SVG";
 import { useParams } from "react-router";
@@ -9,22 +9,20 @@ const DescrzioneApertoTV = () => {
   const [open, setOpen] = useState(null);
   const [filmato, setFilmato] = useState();
 
-  const findById = async () => {
+  const findById = useCallback(async () => {
     const trovato = await cercaIDTV({ movieID });
     setOpen(trovato);
-  };
+  },[movieID]);
+
+  const trailer = useCallback( async () => {
+    const trovato = await videoTV({ movieID });
+    setFilmato(trovato);
+  },[movieID]);
 
   useEffect(() => {
     findById();
-  }, []);
-
-  const trailer = async () => {
-    const trovato = await videoTV({ movieID });
-    setFilmato(trovato);
-  };
-  useEffect(() => {
     trailer();
-  }, []);
+  }, [findById, trailer]);
   return (
     <div className="relative">
       {open && (

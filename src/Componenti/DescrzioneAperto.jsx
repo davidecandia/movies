@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { cercaID, video } from "../utilities/funzioniApi";
 import { YoutubeIcon } from "../utilities/SVG";
 import { useParams } from "react-router";
@@ -8,21 +8,20 @@ const DescrzioneAperto = () => {
   const [open, setOpen] = useState(null);
   const [filmato, setFilmato] = useState();
 
-  const findById = async () => {
+  const findById = useCallback(async () => {
     const trovato = await cercaID({ movieID });
     setOpen(trovato);
-  };
+  },[movieID]);
 
-  const trailer = async () => {
+  const trailer = useCallback( async () => {
     const trovato = await video({ movieID });
     setFilmato(trovato);
-  };
+  },[movieID]);
 
   useEffect(() => {
     findById();
     trailer();
-  }, [movieID]);
-  console.log("film", filmato);
+  }, [findById, trailer]);
 
   return (
     <div className=" mt-4">
