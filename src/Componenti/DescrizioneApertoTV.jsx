@@ -1,4 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { format } from "date-fns";
+import itLocale from "date-fns/locale/it";
 import { cercaIDTV, videoTV } from "../utilities/funzioniApi";
 import { YoutubeIcon } from "../utilities/SVG";
 import { useParams } from "react-router";
@@ -43,7 +45,11 @@ const DescrzioneApertoTV = () => {
               <h1 className="text-3xl font-bold">
                 {open.name}{" "}
                 <br />
-                <span className=" opacity-80">({open.first_air_date})</span>
+                <span className=" opacity-80">
+                {format(new Date(open.first_air_date), "dd MMM, yyyy", {
+                    locale: itLocale,
+                  })}
+                  </span>
               </h1>
               <div className="flex">
                 {open.genres && open.genres.length > 0 ? (

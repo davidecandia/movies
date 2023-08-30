@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { format } from "date-fns";
+import itLocale from "date-fns/locale/it";
 import { cercaSerie } from '../utilities/funzioniApi';
 import DescrzioneApertoTV from './DescrizioneApertoTV';
 import { Link, useParams } from 'react-router-dom';
@@ -53,7 +55,11 @@ const CercaSerieTV = () => {
                 <div className=' absolute top-2 right-2 p-2 bg-zinc-800 rounded-full'>{movie.vote_average}</div>
                 <div className=' text-white p-2 w-full text-center'>
                   <h2 className='text-xs font-semibold whitespace-normal'>{movie.name}</h2>
-                  <p className='text-xs'>{movie.release_date}</p>
+                  <p className='text-xs'>
+                  {format(new Date(movie.first_air_date), "dd MMM, yyyy", {
+                    locale: itLocale,
+                  })}
+                    </p>
                 </div>
               </div>
             </Link>

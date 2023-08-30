@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { format } from "date-fns";
+import itLocale from "date-fns/locale/it";
 import { fetchTopSerie } from '../utilities/funzioniApi';
 import CercaSerieTV from './CercaSeries';
 import DescrzioneApertoTV from './DescrizioneApertoTV';
@@ -32,7 +34,11 @@ const Serie = () => {
                 <div className=' absolute top-2 right-2 p-2 bg-zinc-800 rounded-full'>{movie.vote_average}</div>
                 <div className=' text-white p-2 w-full text-center'>
                   <h2 className='text-xs font-semibold whitespace-normal'>{movie.original_name}</h2>
-                  <p className='text-xs'>{movie.first_air_date}</p>
+                  <p className='text-xs'>
+                  {format(new Date(movie.first_air_date), "dd MMM, yyyy", {
+                    locale: itLocale,
+                  })}
+                    </p>
                 </div>
               </div>
               <div className=' hidden w-full h-auto'>

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { format } from "date-fns";
+import itLocale from "date-fns/locale/it";
 import { fetchTopFilms } from '../utilities/funzioniApi';
 import DescrzioneAperto from './DescrzioneAperto';
 import { Link, useParams } from 'react-router-dom';
@@ -29,7 +31,11 @@ const TopFilm = () => {
                 <div className=' absolute top-2 right-2 p-2 bg-zinc-800 rounded-full'><p>{movie.vote_average}</p></div>
                 <div className=' text-white p-2 w-full text-center'>
                   <h2 className='text-xs font-semibold whitespace-normal'>{movie.title}</h2>
-                  <p className='text-xs'>{movie.release_date}</p>
+                  <p className='text-xs'>
+                  {format(new Date(movie.release_date), "dd MMM, yyyy", {
+                    locale: itLocale,
+                  })}
+                    </p>
                 </div>
               </div>
             </Link>
