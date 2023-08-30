@@ -33,7 +33,7 @@ const DescrzioneApertoTV = () => {
           <img
             src={`https://image.tmdb.org/t/p/w500${open.backdrop_path}`}
             alt="No img"
-            className=" w-full h-screen z-0 img-full rounded-md"
+            className=" w-full h-screen z-0 img-full object-cover object-center"
           />
           <div className="max-w-5xl mx-[50%] translate-x-[-50%] absolute top-0 left-0 w-full h-full text-white z-10 p-4 lg:flex gap-4 items-center  ">
             <img
