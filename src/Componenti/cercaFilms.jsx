@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { format } from "date-fns";
 import itLocale from "date-fns/locale/it";
 import { cercaMovies } from '../utilities/funzioniApi';
@@ -23,14 +23,14 @@ const CercaFilms = () => {
     movie.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const findMovies = async () =>{
+  const findMovies = useCallback(async () =>{
     const trovato = await cercaMovies(searchTerm);
     setMovies(trovato);
-  }
+  },[searchTerm])
 
   useEffect(() => {
     findMovies();
-  }, [searchTerm]);
+  }, [searchTerm, findMovies]);
 
 
 

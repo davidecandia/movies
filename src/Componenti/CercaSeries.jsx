@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { format } from "date-fns";
 import itLocale from "date-fns/locale/it";
 import { cercaSerie } from '../utilities/funzioniApi';
@@ -22,14 +22,14 @@ const CercaSerieTV = () => {
     tv.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const findSerie = async () =>{
+  const findSerie = useCallback(async () =>{
     const trovato = await cercaSerie(searchTerm);
     setSerie(trovato);
-  }
+  },[searchTerm])
 
   useEffect(() => {
     findSerie();
-  }, [searchTerm]);
+  }, [searchTerm, findSerie]);
 
 
 
