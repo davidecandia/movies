@@ -17,10 +17,10 @@ const Header = () => {
       </div>
       <div>
         <ul className="flex gap-8 pr-8">
-          <li className=" hover:px-1 hover:rounded-full hover:bg-white hover:text-black">
+          <li className=" p-1 |hover:px-1 hover:rounded-full hover:bg-white hover:text-black">
             <Link to="./movies">FILM</Link>
           </li>
-          <li className=" hover:px-1 hover:rounded-full hover:bg-white hover:text-black">
+          <li className=" p-1 |hover:px-1 hover:rounded-full hover:bg-white hover:text-black">
             <Link to="./movies/serie">SERIE</Link>
           </li>
         </ul>

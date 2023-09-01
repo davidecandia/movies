@@ -78,7 +78,7 @@ const DescrzioneAperto = () => {
                       <h4 className="flex gap-2">
                         Guarda il trailer su {<YoutubeIcon />}YouTube:{" "}
                         <a
-                          className=" hover:p-1 hover:bg-white hover:rounded-full hover:text-black hover:transition-all "
+                          className=" p-1 |hover:p-1 hover:bg-white hover:rounded-full hover:text-black hover:transition-all "
                           target="blank"
                           href={`https://www.youtube.com/watch?v=${
                             (
