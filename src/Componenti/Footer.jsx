@@ -2,7 +2,7 @@ import React from 'react'
 import { FaGithub, FaInstagram } from 'react-icons/fa';
 const Footer = () => {
   return (
-    <div className=' mt-4 max-w-5xl w-full mx-auto p-8 rounded-full bg-[#121212] |absolute bottom-0| flex flex-col items-center' >
+    <div className=' mt-20 max-w-5xl w-full mx-auto p-8 rounded-full bg-[#121212] |absolute bottom-0| flex flex-col items-center' >
       <div className='flex gap-4'>
         <p>Visita le mie pagine</p>
         <a href="https://github.com/Dexy98"><FaGithub/></a>

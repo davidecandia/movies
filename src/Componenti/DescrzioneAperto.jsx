@@ -100,7 +100,7 @@ const DescrzioneAperto = () => {
 
               <div>
                 <h2 className=" font-bold text-xl">Descrizione</h2>
-                <p className=" font-normal text-md leading-5">
+                <p className=" font-normal text-md leading-5 max-sm:text-sm max-sm:leading-4">
                   {open.overview || "Nessuna descrizione"}
                 </p>
               </div>
