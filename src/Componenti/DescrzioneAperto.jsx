@@ -75,8 +75,8 @@ const DescrzioneAperto = () => {
                   {filmato.responseJson.results.length > 0 ||
                   filmato.responseJsonEn.results.length > 0 ? (
                     <div>
-                      <h4 className="flex gap-2">
-                        Guarda il trailer su {<YoutubeIcon />}YouTube:{" "}
+                      <h4 className="flex gap-2 items-center">
+                        {<YoutubeIcon />}YouTube:{" "}
                         <a
                           className=" p-1 |hover:p-1 hover:bg-white hover:rounded-full hover:text-black hover:transition-all "
                           target="blank"
@@ -87,7 +87,7 @@ const DescrzioneAperto = () => {
                             ).key
                           }`}
                         >
-                          •Link
+                          •Guarda Trailer
                         </a>
                       </h4>
                     </div>
