@@ -1,9 +1,10 @@
 const fetchTopFilms = async () => {
+  const apiKey = process.env.REACT_APP_MOVIES;
     const options = {
       method: 'GET',
       headers: {
         accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MWE3ZmIyMWYxMTIwOTcyMzIwZTMzODI5YmMxMmJhZiIsInN1YiI6IjY0ZTczMzFmMDZmOTg0MDBlYjVmMWJlNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gRRsWsLuNHtuPWTo_eeQH7jMC8lbW-P9AJzb3p9QHbY'
+        Authorization: `Bearer ${apiKey}` 
       }
     };
   
@@ -22,12 +23,12 @@ const fetchTopFilms = async () => {
   
 //cerca movies 
 const cercaMovies = async (searchTerm) => {
-
+  const apiKey = process.env.REACT_APP_MOVIES;
     const options = {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MWE3ZmIyMWYxMTIwOTcyMzIwZTMzODI5YmMxMmJhZiIsInN1YiI6IjY0ZTczMzFmMDZmOTg0MDBlYjVmMWJlNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gRRsWsLuNHtuPWTo_eeQH7jMC8lbW-P9AJzb3p9QHbY'
+          Authorization: `Bearer ${apiKey}` 
         }
       };
       
@@ -46,11 +47,12 @@ const cercaMovies = async (searchTerm) => {
 
     //top serie
     const fetchTopSerie = async() =>{
+      const apiKey = process.env.REACT_APP_MOVIES;
         const options = {
             method: 'GET',
             headers: {
               accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MWE3ZmIyMWYxMTIwOTcyMzIwZTMzODI5YmMxMmJhZiIsInN1YiI6IjY0ZTczMzFmMDZmOTg0MDBlYjVmMWJlNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gRRsWsLuNHtuPWTo_eeQH7jMC8lbW-P9AJzb3p9QHbY'
+              Authorization: `Bearer ${apiKey}` 
             }
           };
           const url = 'https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=it-IT&page=1&sort_by=popularity.desc';
@@ -67,12 +69,13 @@ const cercaMovies = async (searchTerm) => {
     };
     // cerca serie TV 
 const cercaSerie = async (searchTerm) => {
+  const apiKey = process.env.REACT_APP_MOVIES;
 
     const options = {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MWE3ZmIyMWYxMTIwOTcyMzIwZTMzODI5YmMxMmJhZiIsInN1YiI6IjY0ZTczMzFmMDZmOTg0MDBlYjVmMWJlNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gRRsWsLuNHtuPWTo_eeQH7jMC8lbW-P9AJzb3p9QHbY'
+          Authorization: `Bearer ${apiKey}` 
         }
       };
       
@@ -90,11 +93,12 @@ const cercaSerie = async (searchTerm) => {
 
     //find by ID film
     const cercaID = async ({movieID}) => {
+      const apiKey = process.env.REACT_APP_MOVIES;
       const options = {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MWE3ZmIyMWYxMTIwOTcyMzIwZTMzODI5YmMxMmJhZiIsInN1YiI6IjY0ZTczMzFmMDZmOTg0MDBlYjVmMWJlNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gRRsWsLuNHtuPWTo_eeQH7jMC8lbW-P9AJzb3p9QHbY'
+          Authorization: `Bearer ${apiKey}` 
         }
       };
 
@@ -115,11 +119,12 @@ const cercaSerie = async (searchTerm) => {
 
         //find by ID  TV 
         const cercaIDTV = async ({movieID}) => {
+          const apiKey = process.env.REACT_APP_MOVIES;
           const options = {
             method: 'GET',
             headers: {
               accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MWE3ZmIyMWYxMTIwOTcyMzIwZTMzODI5YmMxMmJhZiIsInN1YiI6IjY0ZTczMzFmMDZmOTg0MDBlYjVmMWJlNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gRRsWsLuNHtuPWTo_eeQH7jMC8lbW-P9AJzb3p9QHbY'
+              Authorization: `Bearer ${apiKey}` 
             }
           };
     
@@ -139,11 +144,12 @@ const cercaSerie = async (searchTerm) => {
 
         //video movies
         const video = async ({movieID}) => {
+          const apiKey = process.env.REACT_APP_MOVIES;
         const options = {
           method: 'GET',
           headers: {
             accept: 'application/json',
-            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MWE3ZmIyMWYxMTIwOTcyMzIwZTMzODI5YmMxMmJhZiIsInN1YiI6IjY0ZTczMzFmMDZmOTg0MDBlYjVmMWJlNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gRRsWsLuNHtuPWTo_eeQH7jMC8lbW-P9AJzb3p9QHbY'
+            Authorization: `Bearer ${apiKey}` 
           }
         };
 
@@ -174,11 +180,12 @@ const cercaSerie = async (searchTerm) => {
 
         //video movies tv
         const videoTV = async ({movieID}) => {
+          const apiKey = process.env.REACT_APP_MOVIES;
           const options = {
             method: 'GET',
             headers: {
               accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MWE3ZmIyMWYxMTIwOTcyMzIwZTMzODI5YmMxMmJhZiIsInN1YiI6IjY0ZTczMzFmMDZmOTg0MDBlYjVmMWJlNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gRRsWsLuNHtuPWTo_eeQH7jMC8lbW-P9AJzb3p9QHbY'
+              Authorization: `Bearer ${apiKey}` 
             }
           };
   
