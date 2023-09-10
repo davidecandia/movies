@@ -27,7 +27,7 @@ const Serie = () => {
     <h1 className='font-bold text-4xl'>TOP SERIE TV</h1>
       <div className='overflow-x-auto whitespace-nowrap'>
         <div className='flex space-x-4 p-4'>
-          {serie.map((movie, index) => (
+          {serie.map((movie) => (
             <Link to={`/movies/tv/${movie.id}`} className='flex-none w-40 hover:scale-110 transition-all' key={movie.id}>
               <div className='relative'>
                 <img src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} alt='No img' className='rounded-lg ' />
@@ -35,7 +35,7 @@ const Serie = () => {
                 <div className=' text-white p-2 w-full text-center'>
                   <h2 className='text-xs font-semibold whitespace-normal'>{movie.original_name}</h2>
                   <p className='text-xs'>
-                  {format(new Date(movie.first_air_date), "dd MMM, yyyy", {
+                  {movie.first_air_date && format(new Date(movie.first_air_date), "dd MMM, yyyy", {
                     locale: itLocale,
                   })}
                     </p>
