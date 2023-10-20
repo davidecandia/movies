@@ -35,7 +35,7 @@ const TopFilm = () => {
                   alt="No img"
                   className="rounded-lg"
                 />
-                <div className=" absolute top-2 right-2 p-2 bg-zinc-800 rounded-full">
+                <div className=" absolute top-2 right-2  h-9 w-9 flex justify-center items-center bg-zinc-800 rounded-full">
                   <p>{movie.vote_average}</p>
                 </div>
                 <div className=" text-white p-2 w-full text-center">
