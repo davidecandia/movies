@@ -18,11 +18,12 @@ const CercaFilms = () => {
   };
 
   const handleSearchClick = () => {
-    findMovies(); 
+    findMovies();
   };
 
-   const handleKeyPress = (event) => {
-    if (event.key === 'Enter') { //click di tasto invio
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      //click di tasto invio
       findMovies();
     }
   };
@@ -43,8 +44,8 @@ const CercaFilms = () => {
   return (
     <>
       <TopFilm />
-      <div className="max-w-5xl w-full mx-auto ">
-        <h1 className="font-bold text-4xl my-4">CERCA</h1>
+      <div className="max-w-5xl w-full mx-auto max-lg:p-4 ">
+        <h1 className="font-bold text-4xl my-4">Cerca</h1>
         <div className="mb-4 transition-all flex gap-1 items-center">
           <input
             type="text"
@@ -64,8 +65,7 @@ const CercaFilms = () => {
               <Link
                 to={`/movies/movie/${movie.id}`}
                 className="flex-none w-40 hover:scale-110 transition-all"
-                key={movie.id}
-              >
+                key={movie.id}>
                 <div className="relative">
                   <img
                     src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}

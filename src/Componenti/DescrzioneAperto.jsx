@@ -13,12 +13,12 @@ const DescrzioneAperto = () => {
   const findById = useCallback(async () => {
     const trovato = await cercaID({ movieID });
     setOpen(trovato);
-  },[movieID]);
+  }, [movieID]);
 
-  const trailer = useCallback( async () => {
+  const trailer = useCallback(async () => {
     const trovato = await video({ movieID });
     setFilmato(trovato);
-  },[movieID]);
+  }, [movieID]);
 
   useEffect(() => {
     findById();
@@ -26,7 +26,7 @@ const DescrzioneAperto = () => {
   }, [findById, trailer]);
 
   return (
-    <div className=" mt-4">
+    <div className="">
       {open && (
         <div className=" w-full mx-auto h-full relative ">
           <div className="absolute top-0 left-0 w-full h-screen bg-black opacity-60 z-1"></div>
@@ -43,21 +43,20 @@ const DescrzioneAperto = () => {
             />
             <div>
               <h1 className="text-3xl font-bold">
-                {open.original_title}{" "}
-                <br />
+                {open.original_title} <br />
                 <span className=" opacity-80">
-                {format(new Date(open.release_date), "dd MMM, yyyy", {
+                  {format(new Date(open.release_date), "dd MMM, yyyy", {
                     locale: itLocale,
                   })}
-                  </span>
+                </span>
               </h1>
               <div className="flex">
                 {open.genres && open.genres.length > 0 ? (
                   <div className=" flex gap-1">
-                    <p>Genere: {open.genres[0].name}</p> 
+                    <p>Genere: {open.genres[0].name}</p>
                     {open.genres[1] && <p>{open.genres[1].name} </p>}
-                    {open.genres[2] && <p>{open.genres[2].name} </p>} 
-                    {open.genres[3] && <p>{open.genres[3].name} </p>} 
+                    {open.genres[2] && <p>{open.genres[2].name} </p>}
+                    {open.genres[3] && <p>{open.genres[3].name} </p>}
                   </div>
                 ) : (
                   <p>Genere non disponibile</p>
@@ -85,8 +84,7 @@ const DescrzioneAperto = () => {
                               filmato.responseJson.results[0] ||
                               filmato.responseJsonEn.results[0]
                             ).key
-                          }`}
-                        >
+                          }`}>
                           •Guarda Trailer
                         </a>
                       </h4>
@@ -94,7 +92,6 @@ const DescrzioneAperto = () => {
                   ) : (
                     <p>Nessun trailer disponibile.</p>
                   )}
-
                 </>
               )}
 

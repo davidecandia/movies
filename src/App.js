@@ -10,17 +10,15 @@ import DescrzioneApertoTV from "./Componenti/DescrizioneApertoTV";
 function App() {
   return (
     <Router>
-      <div className="mt-4">
-        <Header />
+      <Header />
 
-        <Routes>
-          <Route path='/movies' element={<Films />} />
-          <Route path='/movies/serie' element={<Serie />} />
-          <Route path='/movies/:type/:ID' element={<DetailPage />} />
-        </Routes>
-        
-        <Footer />
-      </div>
+      <Routes>
+        <Route path='/movies' element={<Films />} />
+        <Route path='/movies/serie' element={<Serie />} />
+        <Route path='/movies/:type/:ID' element={<DetailPage />} />
+      </Routes>
+
+      <Footer />
     </Router>
   );
 }
