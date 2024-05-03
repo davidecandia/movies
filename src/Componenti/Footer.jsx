@@ -2,7 +2,7 @@ import React from "react";
 import { FaGithub, FaInstagram } from "react-icons/fa";
 const Footer = () => {
   return (
-    <footer className=" mt-20  w-full mx-auto p-8 bg-[#121212] |absolute bottom-0| flex flex-col items-center">
+    <footer className="w-full mx-auto p-8 bg-[#121212] |absolute bottom-0| flex flex-col items-center">
       <div className="max-w-5xl">
         <div className="flex gap-4 items-center">
           <p>Visita le mie pagine</p>
