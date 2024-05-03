@@ -36,7 +36,7 @@ const TopFilm = () => {
                   className="rounded-lg"
                 />
                 <div className=" absolute top-2 right-2  h-9 w-9 flex justify-center items-center bg-zinc-800 rounded-full">
-                  <p>{movie.vote_average}</p>
+                  <p>{Math.round(movie.vote_average * 10) / 10}</p>
                 </div>
                 <div className=" text-white p-2 w-full text-center">
                   <h2 className="text-xs font-semibold whitespace-normal">
