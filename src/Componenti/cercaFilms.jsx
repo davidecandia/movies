@@ -73,7 +73,7 @@ const CercaFilms = () => {
                     className="rounded-lg "
                   />
                   <div className=" absolute top-2 right-2 p-2 bg-zinc-800 rounded-full">
-                    {movie.vote_average}
+                    {Math.round(movie.vote_average * 10) / 10}
                   </div>
                   <div className=" text-white p-2 w-full text-center">
                     <h2 className="text-xs font-semibold whitespace-normal">
