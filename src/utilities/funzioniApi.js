@@ -8,8 +8,8 @@ const fetchTopFilms = async () => {
       }
     };
   
-    const url = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=it-IT&page=1&sort_by=popularity.desc';
-    
+    //const url = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=it-IT&page=1&sort_by=popularity.desc';
+    const url = "https://api.themoviedb.org/3/trending/movie/week?language=it-IT"
     try {
       const response = await fetch(url, options);
       const responseJson = await response.json();
@@ -55,8 +55,9 @@ const cercaMovies = async (searchTerm) => {
               Authorization: `Bearer ${apiKey}` 
             }
           };
-          const url = 'https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=it-IT&page=1&sort_by=popularity.desc';
-    
+          //const url = 'https://api.themoviedb.org/3/discover/tv?include_adult=false&include_null_first_air_dates=false&language=it-IT&page=1&sort_by=popularity.desc';
+          const url = "https://api.themoviedb.org/3/trending/tv/week?language=it-IT"
+
           try {
             const response = await fetch(url, options);
             const responseJson = await response.json();

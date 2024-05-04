@@ -65,7 +65,7 @@ const DescrzioneAperto = () => {
               </div>
 
               <br />
-              <button className=" p-2 bg-zinc-800 rounded-full">
+              <button className=" p-2 bg-zinc-800 rounded-full cursor-default">
                 {Math.round(open.vote_average * 10) / 10}
               </button>
               <br />
