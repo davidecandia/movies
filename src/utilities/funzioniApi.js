@@ -207,9 +207,30 @@ const cercaSerie = async (searchTerm) => {
             }
           }
 
-          
-
+          //TRENDING People
+        const peopleApi = async () => {
+          const apiKey = process.env.REACT_APP_MOVIES;
+          const options = {
+            method: 'GET',
+            headers: {
+              accept: 'application/json',
+              Authorization: `Bearer ${apiKey}` 
+            }
+          };
+  
+          const url = `https://api.themoviedb.org/3/trending/person/week?language=it-IT`;        
+            try {
+              const response = await fetch(url, options);
+              const responseJson = await response.json();
+              console.log('people', responseJson)
+  
+              return { responseJson } || [];
+            } catch (error) {
+              console.error('Error during API request:', error);
+              return {};
+            }
+          }
   
 
-  export  { fetchTopFilms, cercaMovies, fetchTopSerie, cercaSerie, cercaID, cercaIDTV, video, videoTV };
+  export  { fetchTopFilms, cercaMovies, fetchTopSerie, cercaSerie, cercaID, cercaIDTV, video, videoTV, peopleApi };
   

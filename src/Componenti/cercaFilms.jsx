@@ -6,6 +6,7 @@ import TopFilm from "./topFilm";
 import DescrzioneAperto from "./DescrzioneAperto";
 import { Link, useParams } from "react-router-dom";
 import { Search } from "../utilities/SVG";
+import People from "./People";
 
 const CercaFilms = () => {
   const [movies, setMovies] = useState([]);
@@ -44,6 +45,7 @@ const CercaFilms = () => {
   return (
     <>
       <TopFilm />
+      <People />
       <div className="max-w-5xl w-full mx-auto max-lg:p-4 ">
         <h1 className="font-bold text-4xl my-4">Cerca</h1>
         <div className="mb-4 transition-all flex gap-1 items-center">
