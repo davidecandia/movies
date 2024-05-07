@@ -4,7 +4,6 @@ import itLocale from "date-fns/locale/it";
 import { cercaID, video, similarMovies } from "../utilities/funzioniApi";
 import { YoutubeIcon } from "../utilities/SVG";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
 import GenericFlow from "./GenericFlow";
 
 const DescrzioneAperto = () => {
