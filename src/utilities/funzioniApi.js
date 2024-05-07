@@ -283,4 +283,28 @@ const similarMovies = async ({ movieID }) => {
   }
 }
 
-export { fetchTopFilms, cercaMovies, fetchTopSerie, cercaSerie, cercaID, cercaIDTV, video, videoTV, peopleApi, descrizionePeople, similarMovies };
+// lista movies people by ID
+const moviesPeopleApi = async ({ peopleID }) => {
+  const apiKey = process.env.REACT_APP_MOVIES;
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${apiKey}`
+    }
+  };
+  const url = `https://api.themoviedb.org/3/person/${peopleID}/movie_credits?language=it-IT`;
+  try {
+    const response = await fetch(url, options);
+    const responseJson = await response.json();
+    console.log(' lista moviespeople', responseJson)
+
+    return responseJson.cast || [];
+  } catch (error) {
+    console.error('Error during API request:', error);
+    return {};
+  }
+}
+
+
+export { fetchTopFilms, cercaMovies, fetchTopSerie, cercaSerie, cercaID, cercaIDTV, video, videoTV, peopleApi, descrizionePeople, similarMovies, moviesPeopleApi };

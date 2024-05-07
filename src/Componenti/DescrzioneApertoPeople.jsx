@@ -1,12 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { format } from "date-fns";
 import itLocale from "date-fns/locale/it";
-import { descrizionePeople } from "../utilities/funzioniApi";
+import { descrizionePeople, moviesPeopleApi } from "../utilities/funzioniApi";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 const DescrzioneApertoPeople = () => {
   const { ID: peopleID } = useParams();
   const [open, setOpen] = useState(null);
+  const [movies, setMovies] = useState([]);
 
   const findById = useCallback(async () => {
     const trovato = await descrizionePeople({ peopleID: peopleID });
@@ -14,8 +16,15 @@ const DescrzioneApertoPeople = () => {
     setOpen(trovato);
   }, [peopleID]);
 
+  const listMoviesPeople = useCallback(async () => {
+    const trovato = await moviesPeopleApi({ peopleID: peopleID });
+    console.log(" list moviespeople",trovato)
+    setMovies(trovato);
+  }, [peopleID]);
+
   useEffect(() => {
     findById();
+    listMoviesPeople();
   }, [findById]);
 
   return (
@@ -49,35 +58,9 @@ const DescrzioneApertoPeople = () => {
                 {Math.round(open.responseJson.popularity * 10) / 10}
               </button>
               <br />
-              {/* {filmato && (
-                <>
-                  {filmato.responseJson.results.length > 0 ||
-                  filmato.responseJsonEn.results.length > 0 ? (
-                    <div>
-                      <h4 className="flex gap-2 items-center">
-                        {<YoutubeIcon />}YouTube:{" "}
-                        <a
-                          className=" p-1 |hover:p-1 hover:bg-white hover:rounded-full hover:text-black hover:transition-all "
-                          target="blank"
-                          href={`https://www.youtube.com/watch?v=${
-                            (
-                              filmato.responseJson.results[0] ||
-                              filmato.responseJsonEn.results[0]
-                            ).key
-                          }`}>
-                          •Guarda Trailer
-                        </a>
-                      </h4>
-                    </div>
-                  ) : (
-                    <p>Nessun trailer disponibile.</p>
-                  )}
-                </>
-              )} */}
-
               <div>
                 <h2 className=" font-bold text-xl">Descrizione</h2>
-                <p className=" font-normal text-md leading-5 max-sm:text-sm max-sm:leading-4">
+                <p className=" font-normal text-md leading-5 max-sm:text-sm max-sm:leading-4 bg-zinc-950/30	">
                   {open.responseJson.biography || open.responseJsonEn.biography || "Nessuna descrizione"}
                 </p>
               </div>
@@ -85,6 +68,44 @@ const DescrzioneApertoPeople = () => {
           </div>
         </div>
       )}
+
+      {/* films  */}
+      <div className="max-w-5xl w-full mx-auto max-lg:p-4 ">
+      <h1 className="font-bold text-4xl my-4">Movie Credits</h1>
+      <div className="overflow-x-auto whitespace-nowrap">
+        <div className="flex space-x-4 p-4">
+          {movies && movies.map((movie) => (
+            <Link
+              to={`/movies/movie/${movie.id}`}
+              className="flex-none w-40 hover:scale-110 transition-all"
+              key={movie.id}>
+              <div className="relative">
+                <img
+                  src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                  alt="No img"
+                  className="rounded-lg"
+                />
+                <div className=" absolute top-2 right-2  h-9 w-9 flex justify-center items-center bg-zinc-800 rounded-full">
+                  <p>{Math.round(movie.vote_average * 10) / 10}</p>
+                </div>
+                <div className=" text-white p-2 w-full text-center">
+                  <h2 className="text-xs font-semibold whitespace-normal">
+                    {movie.title}
+                  </h2>
+                  {/* <p className="text-xs">
+                    {format(new Date(movie.release_date), "dd MMM, yyyy", {
+                      locale: itLocale,
+                    })}
+                  </p> */}
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </div>
+
+
     </div>
   );
 };
