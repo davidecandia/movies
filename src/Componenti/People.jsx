@@ -4,9 +4,10 @@ import React, { useEffect, useState } from "react";
 import { peopleApi } from "../utilities/funzioniApi";
 import DescrzioneAperto from "./DescrzioneAperto";
 import { Link, useParams } from "react-router-dom";
+import DescrzioneApertoPeople from "./DescrzioneApertoPeople";
 
 const People = () => {
-  const [people, setPeople] = useState([]);
+  const [peoples, setPeople] = useState([]);
 
   const { ID } = useParams();
 
@@ -14,10 +15,6 @@ const People = () => {
     const peopleData = await peopleApi();
     console.log("people json", peopleData);
     setPeople(peopleData);
-
-    people.map((movie) => {
-      console.log("map",movie);
-    });
   };
   
   useEffect(() => {
@@ -28,11 +25,11 @@ const People = () => {
     <div className="max-w-5xl w-full mx-auto max-lg:p-4 ">
       <h1 className="font-bold text-4xl my-4">Trending People</h1>
       <div className="overflow-x-auto whitespace-nowrap">
-        {people.length > 0 && (
+        {peoples.length > 0 && (
         <div className="flex space-x-4 p-4">
-          {people.map((movie) => (
+          {peoples.map((movie) => (
             <Link
-              to={`/movies/movie/${movie.id}`}
+              to={`/people/${movie.id}`}
               className="flex-none w-40 hover:scale-110 transition-all"
               key={movie.id}>
               <div className="relative">
@@ -46,13 +43,8 @@ const People = () => {
                 </div>
                 <div className=" text-white p-2 w-full text-center">
                   <h2 className="text-xs font-semibold whitespace-normal">
-                    {movie.title}
+                    {movie.name}
                   </h2>
-                  {/* <p className="text-xs">
-                    {format(new Date(movie.release_date), "dd MMM, yyyy", {
-                      locale: itLocale,
-                    })}
-                  </p> */}
                 </div>
               </div>
             </Link>
@@ -60,7 +52,7 @@ const People = () => {
         </div>
         )}
       </div>
-      {/* {ID && <DescrzioneAperto movieID={ID} />} */}
+      {ID && <DescrzioneApertoPeople peopleID={ID} />}
     </div>
   );
 };

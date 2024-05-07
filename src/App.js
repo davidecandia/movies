@@ -6,6 +6,7 @@ import Films from "./Componenti/cercaFilms";
 import Serie from "./Componenti/Serie";
 import DescrzioneAperto from "./Componenti/DescrzioneAperto";
 import DescrzioneApertoTV from "./Componenti/DescrizioneApertoTV";
+import DescrzioneApertoPeople from "./Componenti/DescrzioneApertoPeople";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/movies' element={<Films />} />
         <Route path='/movies/serie' element={<Serie />} />
         <Route path='/movies/:type/:ID' element={<DetailPage />} />
+        <Route path='/people/:ID' element={<DescrzioneApertoPeople />} />
       </Routes>
 
       <Footer />

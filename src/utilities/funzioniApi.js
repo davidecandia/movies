@@ -224,13 +224,40 @@ const cercaSerie = async (searchTerm) => {
               const responseJson = await response.json();
               console.log('people', responseJson)
   
-              return { responseJson } || [];
+              return  responseJson.results || [];
             } catch (error) {
               console.error('Error during API request:', error);
               return {};
             }
           }
+
+          // descrizione people
+          const descrizionePeople = async ({peopleID}) => {
+            const apiKey = process.env.REACT_APP_MOVIES;
+            const options = {
+              method: 'GET',
+              headers: {
+                accept: 'application/json',
+                Authorization: `Bearer ${apiKey}` 
+              }
+            };
+            const url = `https://api.themoviedb.org/3/person/${peopleID}?language=it-IT`;
+            const urlEn = `https://api.themoviedb.org/3/person/${peopleID}?language=en-US`;          
+              try {
+                const response = await fetch(url, options);
+                const responseJson = await response.json();
+                console.log('descrizione people', responseJson)
+    
+                const responseEn = await fetch(urlEn, options);
+                const responseJsonEn = await responseEn.json();
+    
+                return { responseJson, responseJsonEn } || [];
+              } catch (error) {
+                console.error('Error during API request:', error);
+                return {};
+              }
+            }
   
 
-  export  { fetchTopFilms, cercaMovies, fetchTopSerie, cercaSerie, cercaID, cercaIDTV, video, videoTV, peopleApi };
+  export  { fetchTopFilms, cercaMovies, fetchTopSerie, cercaSerie, cercaID, cercaIDTV, video, videoTV, peopleApi, descrizionePeople };
   
