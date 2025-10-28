@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
-import { cercaIDTV, videoTV } from "../utilities/funzioniApi";
+import { cercaIDTV, videoTV, fetchWatchProviders } from "../utilities/funzioniApi";
+import WatchProvidersSection from "../components/sections/WatchProvidersSection";
 import { YoutubeIcon } from "../utilities/SVG";
 import { formatAsItalianDate } from "../utilities/date";
 
@@ -9,6 +10,7 @@ const SeriesDetailPage = () => {
   const [series, setSeries] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [videos, setVideos] = useState(null);
+  const [providers, setProviders] = useState(null);
 
   useEffect(() => {
     const loadSeriesData = async () => {
@@ -16,13 +18,15 @@ const SeriesDetailPage = () => {
 
       try {
         setIsLoading(true);
-        const [seriesResponse, videosResponse] = await Promise.all([
+        const [seriesResponse, videosResponse, providersResponse] = await Promise.all([
           cercaIDTV({ movieID: seriesID }),
           videoTV({ movieID: seriesID }),
+          fetchWatchProviders({ mediaID: seriesID, type: "tv" }),
         ]);
 
         setSeries(seriesResponse);
         setVideos(videosResponse);
+        setProviders(providersResponse);
       } finally {
         setIsLoading(false);
       }
@@ -151,6 +155,8 @@ const SeriesDetailPage = () => {
           </div>
         </div>
       </header>
+
+      <WatchProvidersSection providers={providers} />
     </article>
   );
 };

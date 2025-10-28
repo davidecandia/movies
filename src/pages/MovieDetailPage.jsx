@@ -4,8 +4,10 @@ import {
   cercaID,
   similarMovies,
   video as fetchMovieVideos,
+  fetchWatchProviders,
 } from "../utilities/funzioniApi";
 import MediaCarousel from "../components/media/MediaCarousel";
+import WatchProvidersSection from "../components/sections/WatchProvidersSection";
 import { YoutubeIcon } from "../utilities/SVG";
 import { formatAsItalianDate, parseDateString } from "../utilities/date";
 
@@ -14,6 +16,7 @@ const MovieDetailPage = () => {
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [videos, setVideos] = useState(null);
+  const [providers, setProviders] = useState(null);
   const [similar, setSimilar] = useState([]);
 
   useEffect(() => {
@@ -22,16 +25,18 @@ const MovieDetailPage = () => {
 
       try {
         setIsLoading(true);
-        const [movieResponse, videosResponse, similarResponse] =
+        const [movieResponse, videosResponse, similarResponse, providersResponse] =
           await Promise.all([
             cercaID({ movieID }),
             fetchMovieVideos({ movieID }),
             similarMovies({ movieID }),
+            fetchWatchProviders({ mediaID: movieID, type: "movie" }),
           ]);
 
         setMovie(movieResponse);
         setVideos(videosResponse);
         setSimilar(similarResponse);
+        setProviders(providersResponse);
       } finally {
         setIsLoading(false);
       }
@@ -187,6 +192,8 @@ const MovieDetailPage = () => {
           </div>
         </div>
       </header>
+
+      <WatchProvidersSection providers={providers} />
 
       <MediaCarousel
         title="Film simili"

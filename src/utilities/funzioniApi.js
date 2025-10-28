@@ -202,7 +202,6 @@ const video = async ({ movieID }) => {
 
   const url = `https://api.themoviedb.org/3/movie/${movieID}/videos?language=it-IT`;
   const urlEn = `https://api.themoviedb.org/3/movie/${movieID}/videos?language=en-US`;
-  const urlProvaider = `https://api.themoviedb.org/3/movie/${movieID}/watch/providers`;
 
   try {
     const response = await fetch(url, options);
@@ -212,13 +211,7 @@ const video = async ({ movieID }) => {
     const responseEn = await fetch(urlEn, options);
     const responseJsonEn = await responseEn.json();
 
-
-
-    const responseProvaider = await fetch(urlProvaider, options);
-    const responseJsonProvaider = await responseProvaider.json();
-
-
-    return { responseJson, responseJsonEn, responseJsonProvaider } || [];
+    return { responseJson, responseJsonEn } || [];
   } catch (error) {
     console.error('Error during API request:', error);
     return {};
@@ -252,6 +245,30 @@ const videoTV = async ({ movieID }) => {
     return {};
   }
 }
+
+// watch providers
+const fetchWatchProviders = async ({ mediaID, type }) => {
+  const apiKey = process.env.REACT_APP_MOVIES;
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${apiKey}`
+    }
+  };
+
+  const url = `https://api.themoviedb.org/3/${type}/${mediaID}/watch/providers`;
+
+  try {
+    const response = await fetch(url, options);
+    const responseJson = await response.json();
+    console.log('watch providers', responseJson);
+    return responseJson.results || {};
+  } catch (error) {
+    console.error('Error during API request:', error);
+    return {};
+  }
+};
 
 //TRENDING People
 const peopleApi = async () => {
@@ -364,6 +381,7 @@ export {
   cercaIDTV,
   video,
   videoTV,
+  fetchWatchProviders,
   peopleApi,
   descrizionePeople,
   similarMovies,
