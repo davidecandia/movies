@@ -4,7 +4,7 @@ import film from "../../assets/film.json";
 import { NavLink } from "react-router-dom";
 const Header = () => {
   const navItems = [
-    { label: "Film", to: "/movies" },
+    { label: "Film", to: "/movies", end: true },
     { label: "Serie", to: "/movies/serie" },
   ];
 
@@ -25,6 +25,7 @@ const Header = () => {
             <li key={item.to} className="transition-all duration-300 rounded-full">
               <NavLink
                 to={item.to}
+                end={Boolean(item.end)}
                 className={({ isActive }) =>
                   [
                     "px-3 py-1 rounded-full transition-colors duration-300",
