@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from "react";
-import { format } from "date-fns";
-import itLocale from "date-fns/locale/it";
 import { cercaMovies } from "../utilities/funzioniApi";
 import SearchBar from "../components/common/SearchBar";
 import MediaCarousel from "../components/media/MediaCarousel";
+import UpcomingMoviesSection from "../components/sections/UpcomingMoviesSection";
 import TrendingMoviesSection from "../components/sections/TrendingMoviesSection";
 import TrendingPeopleSection from "../components/sections/TrendingPeopleSection";
+import { formatAsItalianDate } from "../utilities/date";
 
 const MoviesPage = () => {
   const [results, setResults] = useState([]);
@@ -32,15 +32,6 @@ const MoviesPage = () => {
     },
     [setResults]
   );
-
-  const formatDate = (dateString) => {
-    if (!dateString) return undefined;
-    try {
-      return format(new Date(dateString), "dd MMM yyyy", { locale: itLocale });
-    } catch (error) {
-      return undefined;
-    }
-  };
 
   const shouldShowResults = lastQuery && !isSearching && results.length > 0;
 
@@ -80,7 +71,7 @@ const MoviesPage = () => {
             items={results}
             getHref={(movie) => `/movies/movie/${movie.id}`}
             getTitle={(movie) => movie.title}
-            getSubtitle={(movie) => formatDate(movie.release_date)}
+            getSubtitle={(movie) => formatAsItalianDate(movie.release_date)}
             getImage={(movie) =>
               movie.poster_path
                 ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
@@ -96,6 +87,7 @@ const MoviesPage = () => {
         )}
       </section>
 
+      <UpcomingMoviesSection />
       <TrendingMoviesSection />
       <TrendingPeopleSection />
     </main>

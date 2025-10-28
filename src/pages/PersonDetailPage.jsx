@@ -1,12 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
-import { format } from "date-fns";
-import itLocale from "date-fns/locale/it";
 import {
   descrizionePeople,
   moviesPeopleApi,
 } from "../utilities/funzioniApi";
 import MediaCarousel from "../components/media/MediaCarousel";
+import { formatAsItalianDate } from "../utilities/date";
 
 const PersonDetailPage = () => {
   const { ID: personID } = useParams();
@@ -38,11 +37,7 @@ const PersonDetailPage = () => {
   const formattedBirthday = useMemo(() => {
     const date = person?.responseJson?.birthday;
     if (!date) return null;
-    try {
-      return format(new Date(date), "dd MMM yyyy", { locale: itLocale });
-    } catch (error) {
-      return null;
-    }
+    return formatAsItalianDate(date);
   }, [person]);
 
   if (isLoading) {
@@ -142,9 +137,7 @@ const PersonDetailPage = () => {
         getSubtitle={(item) => {
           if (!item.release_date) return undefined;
           try {
-            return format(new Date(item.release_date), "dd MMM yyyy", {
-              locale: itLocale,
-            });
+            return formatAsItalianDate(item.release_date);
           } catch (error) {
             return undefined;
           }

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { format } from "date-fns";
-import itLocale from "date-fns/locale/it";
 import { fetchTopFilms } from "../../utilities/funzioniApi";
 import MediaCarousel from "../media/MediaCarousel";
+import { formatAsItalianDate } from "../../utilities/date";
 
 const TrendingMoviesSection = () => {
   const [movies, setMovies] = useState([]);
@@ -22,15 +21,6 @@ const TrendingMoviesSection = () => {
     loadTrendingMovies();
   }, []);
 
-  const formatDate = (dateString) => {
-    if (!dateString) return undefined;
-    try {
-      return format(new Date(dateString), "dd MMM yyyy", { locale: itLocale });
-    } catch (error) {
-      return undefined;
-    }
-  };
-
   return (
     <MediaCarousel
       title="Film in tendenza"
@@ -42,7 +32,7 @@ const TrendingMoviesSection = () => {
       }
       getHref={(movie) => `/movies/movie/${movie.id}`}
       getTitle={(movie) => movie.title}
-      getSubtitle={(movie) => formatDate(movie.release_date)}
+      getSubtitle={(movie) => formatAsItalianDate(movie.release_date)}
       getImage={(movie) =>
         movie.poster_path
           ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`

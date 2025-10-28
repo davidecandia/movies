@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { format } from "date-fns";
-import itLocale from "date-fns/locale/it";
 import { fetchTopSerie } from "../../utilities/funzioniApi";
 import MediaCarousel from "../media/MediaCarousel";
+import { formatAsItalianDate } from "../../utilities/date";
 
 const TrendingSeriesSection = () => {
   const [series, setSeries] = useState([]);
@@ -22,15 +21,6 @@ const TrendingSeriesSection = () => {
     loadTrendingSeries();
   }, []);
 
-  const formatDate = (dateString) => {
-    if (!dateString) return undefined;
-    try {
-      return format(new Date(dateString), "dd MMM yyyy", { locale: itLocale });
-    } catch (error) {
-      return undefined;
-    }
-  };
-
   return (
     <MediaCarousel
       title="Serie TV in tendenza"
@@ -42,7 +32,7 @@ const TrendingSeriesSection = () => {
       }
       getHref={(serie) => `/movies/tv/${serie.id}`}
       getTitle={(serie) => serie.name || serie.original_name}
-      getSubtitle={(serie) => formatDate(serie.first_air_date)}
+      getSubtitle={(serie) => formatAsItalianDate(serie.first_air_date)}
       getImage={(serie) =>
         serie.poster_path
           ? `https://image.tmdb.org/t/p/w300${serie.poster_path}`

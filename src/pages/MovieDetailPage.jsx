@@ -1,7 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
-import { format } from "date-fns";
-import itLocale from "date-fns/locale/it";
 import {
   cercaID,
   similarMovies,
@@ -9,6 +7,7 @@ import {
 } from "../utilities/funzioniApi";
 import MediaCarousel from "../components/media/MediaCarousel";
 import { YoutubeIcon } from "../utilities/SVG";
+import { formatAsItalianDate, parseDateString } from "../utilities/date";
 
 const MovieDetailPage = () => {
   const { ID: movieID } = useParams();
@@ -55,14 +54,37 @@ const MovieDetailPage = () => {
     return trailer?.key ?? null;
   }, [videos]);
 
-  const formatDate = (dateString) => {
-    if (!dateString) return undefined;
-    try {
-      return format(new Date(dateString), "dd MMM yyyy", { locale: itLocale });
-    } catch (error) {
-      return undefined;
+  const italianReleaseDate = useMemo(() => {
+    if (!movie) return null;
+
+    const releaseDates = movie.release_dates?.results;
+    if (!releaseDates?.length) {
+      return movie.release_date || null;
     }
-  };
+
+    const italyEntry = releaseDates.find(
+      (entry) => entry.iso_3166_1 === "IT" && entry.release_dates?.length
+    );
+
+    if (!italyEntry) {
+      return movie.release_date || null;
+    }
+
+    const sorted = [...italyEntry.release_dates].sort((a, b) => {
+      const first = parseDateString(a.release_date);
+      const second = parseDateString(b.release_date);
+
+      if (first && second) {
+        return first - second;
+      }
+
+      if (first) return -1;
+      if (second) return 1;
+      return 0;
+    });
+
+    return sorted[0]?.release_date || movie.release_date || null;
+  }, [movie]);
 
   if (isLoading) {
     return (
@@ -114,7 +136,9 @@ const MovieDetailPage = () => {
                 {movie.title || movie.original_title}
               </h1>
               <p className="mt-2 text-sm text-zinc-300">
-                {formatDate(movie.release_date)}
+                {formatAsItalianDate(
+                  italianReleaseDate || movie.release_date
+                )}
                 {movie.runtime ? ` • ${movie.runtime} minuti` : ""}
               </p>
             </div>
@@ -170,7 +194,7 @@ const MovieDetailPage = () => {
         emptyMessage="Non sono disponibili suggerimenti simili."
         getHref={(item) => `/movies/movie/${item.id}`}
         getTitle={(item) => item.title}
-        getSubtitle={(item) => formatDate(item.release_date)}
+        getSubtitle={(item) => formatAsItalianDate(item.release_date)}
         getImage={(item) =>
           item.poster_path
             ? `https://image.tmdb.org/t/p/w300${item.poster_path}`

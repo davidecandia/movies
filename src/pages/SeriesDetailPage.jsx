@@ -1,9 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
-import { format } from "date-fns";
-import itLocale from "date-fns/locale/it";
 import { cercaIDTV, videoTV } from "../utilities/funzioniApi";
 import { YoutubeIcon } from "../utilities/SVG";
+import { formatAsItalianDate } from "../utilities/date";
 
 const SeriesDetailPage = () => {
   const { ID: seriesID } = useParams();
@@ -45,15 +44,6 @@ const SeriesDetailPage = () => {
 
     return trailer?.key ?? null;
   }, [videos]);
-
-  const formatDate = (dateString) => {
-    if (!dateString) return undefined;
-    try {
-      return format(new Date(dateString), "dd MMM yyyy", { locale: itLocale });
-    } catch (error) {
-      return undefined;
-    }
-  };
 
   if (isLoading) {
     return (
@@ -105,7 +95,7 @@ const SeriesDetailPage = () => {
                 {series.name || series.original_name}
               </h1>
               <p className="mt-2 text-sm text-zinc-300">
-                {formatDate(series.first_air_date)}
+                {formatAsItalianDate(series.first_air_date)}
                 {series.number_of_seasons
                   ? ` • ${series.number_of_seasons} ${
                       series.number_of_seasons === 1 ? "stagione" : "stagioni"

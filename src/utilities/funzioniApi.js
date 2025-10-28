@@ -21,6 +21,52 @@ const fetchTopFilms = async () => {
   }
 };
 
+// upcoming movies
+const fetchUpcomingMovies = async () => {
+  const apiKey = process.env.REACT_APP_MOVIES;
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${apiKey}`
+    }
+  };
+
+  const url = "https://api.themoviedb.org/3/movie/upcoming?language=it-IT&region=IT";
+  try {
+    const response = await fetch(url, options);
+    const responseJson = await response.json();
+    console.log('upcoming movies', responseJson.results)
+    return responseJson.results || [];
+  } catch (error) {
+    console.error('Error during API request:', error);
+    return [];
+  }
+};
+
+// upcoming series
+const fetchUpcomingSeries = async () => {
+  const apiKey = process.env.REACT_APP_MOVIES;
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${apiKey}`
+    }
+  };
+
+  const url = "https://api.themoviedb.org/3/tv/on_the_air?language=it-IT";
+  try {
+    const response = await fetch(url, options);
+    const responseJson = await response.json();
+    console.log('upcoming series', responseJson.results)
+    return responseJson.results || [];
+  } catch (error) {
+    console.error('Error during API request:', error);
+    return [];
+  }
+};
+
 //cerca movies 
 const cercaMovies = async (searchTerm) => {
   const apiKey = process.env.REACT_APP_MOVIES;
@@ -104,7 +150,7 @@ const cercaID = async ({ movieID }) => {
   };
 
 
-  const url = `https://api.themoviedb.org/3/movie/${movieID}?language=it-IT`;
+  const url = `https://api.themoviedb.org/3/movie/${movieID}?language=it-IT&append_to_response=release_dates`;
 
   try {
     const response = await fetch(url, options);
@@ -307,4 +353,19 @@ const moviesPeopleApi = async ({ peopleID }) => {
 }
 
 
-export { fetchTopFilms, cercaMovies, fetchTopSerie, cercaSerie, cercaID, cercaIDTV, video, videoTV, peopleApi, descrizionePeople, similarMovies, moviesPeopleApi };
+export {
+  fetchTopFilms,
+  fetchUpcomingMovies,
+  fetchUpcomingSeries,
+  cercaMovies,
+  fetchTopSerie,
+  cercaSerie,
+  cercaID,
+  cercaIDTV,
+  video,
+  videoTV,
+  peopleApi,
+  descrizionePeople,
+  similarMovies,
+  moviesPeopleApi
+};
